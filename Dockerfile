@@ -7,4 +7,8 @@ RUN mkdir -p /etc/service/nginx && mkdir -p /etc/service/consul-template && rm /
 ADD consul-template.service /etc/service/consul-template/run
 ADD nginx.conf /etc/consul-templates/nginx.conf
 ADD nginx.service /etc/service/nginx/run
+
+WORKDIR /srv
+RUN rm -rf website && wget http://ftp.drupal.org/files/projects/drupal-7.34.tar.gz && tar -xvf drupal* && rm *.gz && mv drupal* website
+
 CMD ["/usr/bin/runsvdir", "/etc/service"]
